@@ -1,1 +1,0 @@
-/usr/bin/g++ -g "CMakeFiles/SDLTest.dir/src/sdl-test.cpp.o" -o SDLTest  /usr/lib/x86_64-linux-gnu/libSDL2.so 

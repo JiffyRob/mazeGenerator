@@ -1,7 +1,0 @@
-[
-{
-  "directory": "/home/jack/C-workspace/test/build",
-  "command": "/usr/bin/g++  -isystem /usr/include/SDL2 -g -o CMakeFiles/SDLTest.dir/src/sdl-test.cpp.o -c /home/jack/C-workspace/test/src/sdl-test.cpp",
-  "file": "/home/jack/C-workspace/test/src/sdl-test.cpp"
-}
-]
