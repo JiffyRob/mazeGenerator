@@ -6,17 +6,16 @@
 #include <algorithm>
 #include <iostream>
 
-using namespace std;
-using Coord = array<int, 2>;
+using Coord = std::array<int, 2>;
 
 enum DIRECTION {NORTH=1, SOUTH=2, EAST=4, WEST=8};
-array<DIRECTION, 4> directions = {NORTH, EAST, SOUTH, WEST};
+std::array<DIRECTION, 4> directions = {NORTH, EAST, SOUTH, WEST};
 
-map<DIRECTION, int> DX = {{EAST, 1}, {WEST, -1}, {NORTH, 0}, {SOUTH, 0}};
-map<DIRECTION, int> DY = {{EAST, 0}, {WEST, 0}, {NORTH, -1}, {SOUTH, 1}};
-map<DIRECTION, DIRECTION> REVERSE = {{EAST, WEST}, {WEST, EAST}, {NORTH, SOUTH}, {SOUTH, NORTH}};
+std::map<DIRECTION, int> DX = {{EAST, 1}, {WEST, -1}, {NORTH, 0}, {SOUTH, 0}};
+std::map<DIRECTION, int> DY = {{EAST, 0}, {WEST, 0}, {NORTH, -1}, {SOUTH, 1}};
+std::map<DIRECTION, DIRECTION> REVERSE = {{EAST, WEST}, {WEST, EAST}, {NORTH, SOUTH}, {SOUTH, NORTH}};
 
-const string printies[16] = {"   ", " ' ", " , ", " | ", "  -", " `-", " ,-", " |-", "-  ", "-' ", "-, ", "-| ", "---", "-'-", "-,-", "-|-"};
+const std::string printies[16] = {"   ", " ' ", " , ", " | ", "  -", " `-", " ,-", " |-", "-  ", "-' ", "-, ", "-| ", "---", "-'-", "-,-", "-|-"};
 
 class Maze {
     public:
@@ -53,7 +52,7 @@ class Maze {
         }
         // fill grid
         for (int row = 0; row < height; row++) {
-          vector<int> nested = {};
+          std::vector<int> nested = {};
           for (int col = 0; col < height; col++) {
             nested.push_back(0);
           }
@@ -69,7 +68,7 @@ class Maze {
           bool carved = false;
           currentX = cells.front()[0];
           currentY = cells.front()[1];
-          random_shuffle(directions.begin(), directions.end());
+          std::random_shuffle(directions.begin(), directions.end());
           for (int i = 0; i < 4; i++) {
             DIRECTION dir = directions[i];
             int nx = currentX + DX[dir];
@@ -96,8 +95,8 @@ class Maze {
     }
 
     private:
-      deque<Coord> cells;
-      vector<vector<int>> nodes;
+      std::deque<Coord> cells;
+      std::vector<std::vector<int>> nodes;
       int currentX;
       int currentY;
       int width;

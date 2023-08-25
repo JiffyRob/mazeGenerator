@@ -3,7 +3,6 @@
 #include "common.h"
 #include "render.h"
 
-using namespace std;
 
 bool init(SDL_Window* &window) {
     //Initialize SDL

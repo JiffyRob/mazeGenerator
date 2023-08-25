@@ -4,9 +4,8 @@
 #include "maze.h"
 #include "common.h"
 
-using namespace std;
 
-int dumpTexture(SDL_Renderer* renderer, SDL_Texture* &tex, string path) {
+int dumpTexture(SDL_Renderer* renderer, SDL_Texture* &tex, std::string path) {
     if (tex != nullptr) {
         SDL_DestroyTexture(tex);
         tex = nullptr;
@@ -65,7 +64,7 @@ class MazeRenderer {
             this->height = 5;
             this->maze = Maze();
             // drawing
-            cout << filesystem::current_path();
+            std::cout << std::filesystem::current_path();
             this->renderer = nullptr;
             this->mazeTexture = nullptr;
             dumpRenderer(window, this->renderer);
@@ -102,12 +101,12 @@ class MazeRenderer {
         }
 
         void close() {
-            cout << "close maze\n";
+            std::cout << "close maze\n";
             maze.close();
-            cout << "destroy texture\n";
+            std::cout << "destroy texture\n";
             SDL_DestroyTexture(mazeTexture);
             mazeTexture = nullptr;
-            cout << "destory renderer\n";
+            std::cout << "destory renderer\n";
             SDL_DestroyRenderer(renderer);
             renderer = nullptr;
         }
