@@ -52,11 +52,10 @@ class Maze {
         }
         // fill grid
         for (int row = 0; row < height; row++) {
-          std::vector<int> nested = {};
-          for (int col = 0; col < height; col++) {
-            nested.push_back(0);
+          nodes.push_back(std::vector<int>());
+          for (int col = 0; col < width; col++) {
+            nodes.back().push_back(0);
           }
-          nodes.push_back(nested);
         }
         // add beginning cell
         Coord start = {rand() % width, rand() % height};
