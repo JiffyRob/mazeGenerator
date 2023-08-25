@@ -1,0 +1,3 @@
+/home/jack/C-workspace/test/build/CMakeFiles/SDLTest.dir
+/home/jack/C-workspace/test/build/CMakeFiles/edit_cache.dir
+/home/jack/C-workspace/test/build/CMakeFiles/rebuild_cache.dir
