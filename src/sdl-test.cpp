@@ -65,7 +65,7 @@ int main() {
         // rendering
         maze.render();
         // framerate limiting (TODO)
-        SDL_Delay(10);
+        SDL_Delay(50);
     }
     maze.close();
     close(window);

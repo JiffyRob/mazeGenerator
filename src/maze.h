@@ -82,6 +82,8 @@ class Maze {
           if (!carved) {
             cells.pop_front();
           }
+          currentX = cells.front()[0];
+          currentY = cells.front()[1];
           return false;
         }
         return true;

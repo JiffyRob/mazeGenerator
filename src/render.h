@@ -40,7 +40,7 @@ int dumpRenderer(SDL_Window* window, SDL_Renderer* &renderer, int index=-1) {
     return 1;
 }
 
-void dumpFrameRect(SDL_Rect &rect, int index, int frameWidth = 3, int frameHeight = 3, int columns = 16) {
+void dumpFrameRect(SDL_Rect &rect, int index, int frameWidth = 3, int frameHeight = 3, int columns = 17) {
     int row = index / columns;
     int col = index % columns;
     rect.x = col * frameWidth;
@@ -98,6 +98,7 @@ class MazeRenderer {
             int currentY = maze.getCurrentY();
             SDL_Rect srcrect;
             SDL_Rect dstrect;
+            // draw maze
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     dumpFrameRect(srcrect, maze.getAt(x, y));
@@ -105,6 +106,10 @@ class MazeRenderer {
                     SDL_RenderCopy(renderer, mazeTexture, &srcrect, &dstrect);
                 }
             }
+            // draw current cell
+            dumpFrameRect(srcrect, 16);
+            dstrect = cellRect(currentX, currentY);
+            SDL_RenderCopy(renderer, mazeTexture, &srcrect, &dstrect);
             SDL_RenderPresent(renderer);
         }
 
