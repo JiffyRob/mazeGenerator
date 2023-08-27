@@ -4,6 +4,18 @@
 #include "maze.h"
 #include "common.h"
 
+const int BACKGROUND_COLORS[10][3] = { // kinda hacky but whatever
+    {0, 0, 0},
+    {178, 16, 48},
+    {162, 48, 0},
+    {255, 162, 0},
+    {73, 170, 16},
+    {48, 81, 140},
+    {97, 16, 172},
+    {154, 32, 121},
+    {97, 162, 255},
+    {121, 65, 0},
+}; 
 
 int dumpTexture(SDL_Renderer* renderer, SDL_Texture* &tex, std::string path) {
     if (tex != nullptr) {
@@ -64,7 +76,6 @@ class MazeRenderer {
             this->window = window;
             dumpRenderer(window, this->renderer);
             dumpTexture(this->renderer, this->mazeTexture, "assets/basic_maze.bmp");
-            SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
         }
 
         void reset() {
@@ -75,6 +86,7 @@ class MazeRenderer {
             if (color > 9) {
                 color = 0;
             }
+            SDL_SetRenderDrawColor(renderer, BACKGROUND_COLORS[color][0], BACKGROUND_COLORS[color][1], BACKGROUND_COLORS[color][2], 255);
         }
 
         void update() {
