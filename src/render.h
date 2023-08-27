@@ -58,6 +58,7 @@ class MazeRenderer {
             this->maze = Maze();
             // drawing
             std::cout << std::filesystem::current_path();
+            this->color = -1; // on first reset it will be set to 0
             this->renderer = nullptr;
             this->mazeTexture = nullptr;
             this->window = window;
@@ -70,6 +71,10 @@ class MazeRenderer {
             height = (rand() % 11 + 1) * 2;
             width = (rand() % 17 + 1) * 3;
             maze.prep(width, height);
+            color += 1;
+            if (color > 9) {
+                color = 0;
+            }
         }
 
         void update() {
@@ -101,13 +106,13 @@ class MazeRenderer {
             // draw maze
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    dumpFrameRect(srcrect, maze.getAt(x, y));
+                    dumpFrameRect(srcrect, maze.getAt(x, y) + (color * 17));
                     SDL_Rect dstrect = cellRect(x, y);
                     SDL_RenderCopy(renderer, mazeTexture, &srcrect, &dstrect);
                 }
             }
             // draw current cell
-            dumpFrameRect(srcrect, 16);
+            dumpFrameRect(srcrect, 16 + (color * 17));
             dstrect = cellRect(currentX, currentY);
             SDL_RenderCopy(renderer, mazeTexture, &srcrect, &dstrect);
             SDL_RenderPresent(renderer);
@@ -134,5 +139,6 @@ class MazeRenderer {
         SDL_Window* window;
         int width;
         int height;
+        int color;
         Maze maze;
 };
