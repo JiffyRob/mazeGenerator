@@ -15,8 +15,6 @@ std::map<DIRECTION, int> DX = {{EAST, 1}, {WEST, -1}, {NORTH, 0}, {SOUTH, 0}};
 std::map<DIRECTION, int> DY = {{EAST, 0}, {WEST, 0}, {NORTH, -1}, {SOUTH, 1}};
 std::map<DIRECTION, DIRECTION> REVERSE = {{EAST, WEST}, {WEST, EAST}, {NORTH, SOUTH}, {SOUTH, NORTH}};
 
-const std::string printies[16] = {"   ", " ' ", " , ", " | ", "  -", " `-", " ,-", " |-", "-  ", "-' ", "-, ", "-| ", "---", "-'-", "-,-", "-|-"};
-
 class Maze {
     public:
       int getWidth() {
@@ -91,6 +89,7 @@ class Maze {
 
     void close() {
       nodes.clear();
+      cells.clear();
     }
 
     private:

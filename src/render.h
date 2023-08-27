@@ -49,13 +49,6 @@ void dumpFrameRect(SDL_Rect &rect, int index, int frameWidth = 3, int frameHeigh
     rect.h = frameHeight;
 }
 
-void dumpCellRect(SDL_Rect &rect, int x, int y) {
-    rect.w = 3;
-    rect.h = 3;
-    rect.x = x * 3;
-    rect.y = y * 3;
-}
-
 class MazeRenderer {
     public:
         MazeRenderer(SDL_Window* window) {
@@ -67,6 +60,7 @@ class MazeRenderer {
             std::cout << std::filesystem::current_path();
             this->renderer = nullptr;
             this->mazeTexture = nullptr;
+            this->window = window;
             dumpRenderer(window, this->renderer);
             dumpTexture(this->renderer, this->mazeTexture, "assets/basic_maze.bmp");
             SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0x00);
@@ -84,6 +78,20 @@ class MazeRenderer {
             }
         }
 
+        SDL_Rect cellRect(int x, int y) {
+            SDL_Rect rect;
+            int screenWidth;
+            int screenHeight;
+            SDL_GetWindowSize(window, &screenWidth, &screenHeight);
+            int cellWidth = screenWidth / width;
+            int cellHeight = screenHeight / height;
+            rect.x = x * cellWidth;
+            rect.y = y * cellHeight;
+            rect.w = cellWidth;
+            rect.h = cellHeight;
+            return rect;
+        }
+
         void render() {
             SDL_RenderClear(renderer);
             int currentX = maze.getCurrentX();
@@ -93,7 +101,7 @@ class MazeRenderer {
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
                     dumpFrameRect(srcrect, maze.getAt(x, y));
-                    dumpCellRect(dstrect, x, y);
+                    SDL_Rect dstrect = cellRect(x, y);
                     SDL_RenderCopy(renderer, mazeTexture, &srcrect, &dstrect);
                 }
             }
@@ -104,16 +112,21 @@ class MazeRenderer {
             std::cout << "close maze\n";
             maze.close();
             std::cout << "destroy texture\n";
-            SDL_DestroyTexture(mazeTexture);
+            if (mazeTexture != nullptr) {
+                SDL_DestroyTexture(mazeTexture);
+            }
             mazeTexture = nullptr;
             std::cout << "destory renderer\n";
-            SDL_DestroyRenderer(renderer);
+            if (renderer != nullptr) {
+                SDL_DestroyRenderer(renderer);
+            }
             renderer = nullptr;
         }
 
     private:
         SDL_Renderer* renderer;
         SDL_Texture* mazeTexture;
+        SDL_Window* window;
         int width;
         int height;
         Maze maze;
