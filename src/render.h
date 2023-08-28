@@ -2,7 +2,6 @@
 #include <vector>
 #include <filesystem>
 #include "maze.h"
-#include "common.h"
 
 const int BACKGROUND_COLORS[10][3] = { // kinda hacky but whatever
     {0, 0, 0},
@@ -79,7 +78,7 @@ class MazeRenderer {
         }
 
         void reset() {
-            height = (rand() % 11 + 1) * 2;
+            height = (rand() % 11 + 3) * 2;
             width = (rand() % 17 + 1) * 3;
             maze.prep(width, height);
             color += 1;
